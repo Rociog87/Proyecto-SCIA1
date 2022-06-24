@@ -483,7 +483,7 @@ public class Pedidos extends javax.swing.JDialog {
         jPanel1.add(jTextFieldTotals, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 630, 130, -1));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel19.setText("Totals a Pagar $/.");
+        jLabel19.setText("Total $/.");
         jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 610, -1, -1));
 
         jButton_nuevo.setBackground(new java.awt.Color(0, 153, 102));

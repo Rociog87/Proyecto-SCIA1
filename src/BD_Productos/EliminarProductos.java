@@ -24,7 +24,7 @@ public class EliminarProductos extends javax.swing.JDialog {
 
         Control_Productos load = new Control_Productos();
         load.CargarProductos_eliminar();
-        int[] anchos = {50, 200, 50, 200, 50, 60, 150};
+        int[] anchos = {50,150, 200, 50, 200, 200};
         for (int i = 0; i < jTable_productos.getColumnCount(); i++) {
             jTable_productos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
         }
@@ -223,7 +223,7 @@ public class EliminarProductos extends javax.swing.JDialog {
         Control_Productos cc = new Control_Productos();
         String parametroBusqueda = jTextField_busqueda.getText();
         cc.buscarProductosparaEliminarProductos(parametroBusqueda);
-        int[] anchos = {50, 200, 50, 200, 50, 60, 150};
+        int[] anchos = {50,150, 200, 50, 200, 200};
         for (int i = 0; i < jTable_productos.getColumnCount(); i++) {
             jTable_productos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
         }
@@ -234,7 +234,7 @@ public class EliminarProductos extends javax.swing.JDialog {
         Control_Productos cc = new Control_Productos();
         String parametroBusqueda = jTextField_busqueda.getText();
         cc.buscarProductosparaEliminarProductos(parametroBusqueda);
-        int[] anchos = {50, 200, 50, 200, 50, 60, 150};
+        int[] anchos = {50,150, 200, 50, 200, 200};
         for (int i = 0; i < jTable_productos.getColumnCount(); i++) {
             jTable_productos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
         }

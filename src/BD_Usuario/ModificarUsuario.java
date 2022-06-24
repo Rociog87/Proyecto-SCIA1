@@ -1,14 +1,16 @@
 package BD_Usuario;
 
-import BD_Proveedor.*;
-import static BD_Proveedor.ListarProveedor.jTableListarProveedor;
-import Control_BD.*;
+import BD_Usuario.*;
+//import static BD_Proveedor.ListarProveedor.jTableListarProveedor;
+import Control_BD.fusuario;
+import Control_BD.vusuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,25 +19,30 @@ import javax.swing.JOptionPane;
 
 public class ModificarUsuario extends javax.swing.JDialog {
 
-    String Idproveedor = "";
+String idusuario;
 
     public ModificarUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        llamarProveedor();
+        iniciar();
     }
 
-    public ModificarUsuario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private void iniciar() {
+//        Control_Proveedor load = new Control_Proveedor();
+//        load.CargarModificarProveedor();
+//        int[] anchos = {180, 220, 250, 350, 120, 250, 250, 230};
+//        for (int i = 0; i < jTable_usuario.getColumnCount(); i++) {
+//            jTable_usuario.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+//        }
+try {
+            DefaultTableModel modelo;
+            fusuario func = new fusuario();
+            modelo = func.mostrar_inicial();
 
-    private void llamarProveedor() {
-        Control_Proveedor load = new Control_Proveedor();
-        load.CargarModificarProveedor();
-        int[] anchos = {180, 220, 250, 350, 120, 250, 250, 230};
-        for (int i = 0; i < jTable_usuario.getColumnCount(); i++) {
-            jTable_usuario.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+            jTable_usuario.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(rootPane, e);
         }
 
     }
@@ -55,14 +62,18 @@ public class ModificarUsuario extends javax.swing.JDialog {
         jButtonCancelar = new javax.swing.JButton();
         jButtonModificarVendedor = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jTextField_mercancia = new javax.swing.JTextField();
+        txt_correo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldNombre = new javax.swing.JTextField();
+        txt_nombres = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField_telefono = new javax.swing.JTextField();
+        txt_usuario = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField_direccion = new javax.swing.JTextField();
+        txt_apellidos = new javax.swing.JTextField();
+        combo_tipo = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txt_pasword = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_usuario = new javax.swing.JTable();
@@ -85,11 +96,11 @@ public class ModificarUsuario extends javax.swing.JDialog {
                 jTextField_busquedaKeyPressed(evt);
             }
         });
-        jPanel1.add(jTextField_busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 150, 40));
+        jPanel1.add(jTextField_busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 150, 40));
 
         jLabel4.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel4.setText("Buscar  usuario");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
         jButtonCancelar.setBackground(new java.awt.Color(255, 51, 51));
         jButtonCancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -101,7 +112,7 @@ public class ModificarUsuario extends javax.swing.JDialog {
                 jButtonCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 520, 130, 30));
+        jPanel1.add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 570, 130, 30));
 
         jButtonModificarVendedor.setBackground(new java.awt.Color(0, 153, 102));
         jButtonModificarVendedor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -113,35 +124,41 @@ public class ModificarUsuario extends javax.swing.JDialog {
                 jButtonModificarVendedorActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonModificarVendedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 520, 130, 30));
+        jPanel1.add(jButtonModificarVendedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 570, 130, 30));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTextField_mercancia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField_mercancia.addActionListener(new java.awt.event.ActionListener() {
+        txt_correo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_correo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_mercanciaActionPerformed(evt);
+                txt_correoActionPerformed(evt);
             }
         });
 
         jLabel6.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
-        jLabel6.setText("Mercancia");
+        jLabel6.setText("Correo");
 
         jLabel3.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel3.setText("Nombre");
 
-        jTextFieldNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_nombres.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
-        jLabel10.setText("Teléfono");
+        jLabel10.setText("Apellidos");
 
-        jTextField_telefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_usuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
-        jLabel9.setText("Dirección");
+        jLabel9.setText("Usuario");
 
-        jTextField_direccion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txt_apellidos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        combo_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Empleado" }));
+
+        jLabel1.setText("Tipo de usuario");
+
+        jLabel2.setText("Contraseña");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -150,44 +167,70 @@ public class ModificarUsuario extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel9))
-                .addGap(42, 42, 42)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField_direccion)
-                    .addComponent(jTextField_mercancia)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 29, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txt_apellidos)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txt_nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel9))
+                                .addGap(110, 110, 110)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_correo, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txt_pasword, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(73, 73, 73)
+                                    .addComponent(combo_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 37, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txt_nombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10)
+                    .addComponent(txt_apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField_mercancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(101, Short.MAX_VALUE))
+                    .addComponent(txt_correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txt_usuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(combo_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_pasword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(49, 49, 49))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 310, 330));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 430, 420));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -232,13 +275,13 @@ public class ModificarUsuario extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE)
         );
 
         pack();
@@ -251,45 +294,61 @@ public class ModificarUsuario extends javax.swing.JDialog {
 
     private void jButtonModificarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarVendedorActionPerformed
 
-        Control_Proveedor change = new Control_Proveedor();
+                if (txt_nombres.getText().length() == 0 || txt_apellidos.getText().length() == 0 || txt_usuario.getText().length() == 0 || txt_pasword.getText().length() == 0 || txt_correo.getText().length() == 0) {
 
-        String code = jTextField_busqueda.getText();
-        String nombre = jTextFieldNombre.getText();
-        String telefono = (jTextField_telefono.getText());
-        String direccion = (jTextField_direccion.getText());
-        String mercancia = (jTextField_mercancia.getText());
-        change.ModificarProveedor(Idproveedor, nombre, telefono, direccion, mercancia);
-        llamarProveedor();
+            JOptionPane.showMessageDialog(rootPane, "rellene todos los campos");
+
+        } else {
+            vusuario dts = new vusuario();
+            fusuario func = new fusuario();
+            dts.setUsuario(txt_usuario.getText());
+            dts.setPassword(txt_pasword.getText());
+            int tipo = combo_tipo.getSelectedIndex();
+            dts.setTipo((String) combo_tipo.getItemAt(tipo));
+            dts.setNombres(txt_nombres.getText());
+
+            dts.setApellidos(txt_apellidos.getText());
+            dts.setCorreo(txt_correo.getText());
+            
+
+            if (func.editar(dts)) {
+                JOptionPane.showMessageDialog(rootPane, "El Usuario fue Modificado satisfactoriamente");
+            }
+        }
     }//GEN-LAST:event_jButtonModificarVendedorActionPerformed
 
     private void jTable_usuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_usuarioMouseClicked
         // TODO add your handling code here:
         //                 btn_eliminar.setEnabled(true);
-        //              btn_modificar.setEnabled(true);
+                    jButtonModificarVendedor.setEnabled(true);
 
         int fila = jTable_usuario.rowAtPoint(evt.getPoint());
 
-        Idproveedor = (jTable_usuario.getValueAt(fila, 0).toString());
-        jTextFieldNombre.setText((jTable_usuario.getValueAt(fila, 1).toString()));
-        jTextField_direccion.setText((jTable_usuario.getValueAt(fila, 5).toString()));
-        jTextField_telefono.setText((jTable_usuario.getValueAt(fila, 6).toString()));
-        jTextField_mercancia.setText((jTable_usuario.getValueAt(fila, 7).toString()));
+        idusuario = (jTable_usuario.getValueAt(fila, 0).toString());
+        
+        txt_usuario.setText((jTable_usuario.getValueAt(fila, 1).toString()));
+        txt_pasword  .setText(jTable_usuario.getValueAt(fila, 2).toString());
+        txt_apellidos.setText((jTable_usuario.getValueAt(fila, 3).toString()));
+//        combo_tipo.getItemAt((jTable_usuario.getValueAt( fila,4).toString()));
+        txt_nombres.setText((jTable_usuario.getValueAt(fila, 5).toString()));
+        txt_correo.setText((jTable_usuario.getValueAt(fila, 6).toString()));    
+        
     }//GEN-LAST:event_jTable_usuarioMouseClicked
 
     private void jTextField_busquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_busquedaKeyPressed
         // TODO add your handling code here:
-        Control_Proveedor cc = new Control_Proveedor();
+        fusuario cc = new fusuario();
         String parametroBusqueda = jTextField_busqueda.getText();
-        cc.buscarModificarProveedor(parametroBusqueda);
-        int[] anchos = {180, 220, 250, 350, 120, 250, 250, 230};
+        cc.mostrar(parametroBusqueda);
+        int[] anchos = {180, 220, 250, 350, 120, 250, 250};
         for (int i = 0; i < jTable_usuario.getColumnCount(); i++) {
             jTable_usuario.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
         }
     }//GEN-LAST:event_jTextField_busquedaKeyPressed
 
-    private void jTextField_mercanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_mercanciaActionPerformed
+    private void txt_correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_correoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_mercanciaActionPerformed
+    }//GEN-LAST:event_txt_correoActionPerformed
 
     private void jTextField_busquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_busquedaActionPerformed
         // TODO add your handling code here:
@@ -338,9 +397,12 @@ public class ModificarUsuario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> combo_tipo;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonModificarVendedor;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -350,10 +412,11 @@ public class ModificarUsuario extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTable jTable_usuario;
-    private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextField_busqueda;
-    private javax.swing.JTextField jTextField_direccion;
-    private javax.swing.JTextField jTextField_mercancia;
-    private javax.swing.JTextField jTextField_telefono;
+    private javax.swing.JTextField txt_apellidos;
+    private javax.swing.JTextField txt_correo;
+    private javax.swing.JTextField txt_nombres;
+    private javax.swing.JTextField txt_pasword;
+    private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 }

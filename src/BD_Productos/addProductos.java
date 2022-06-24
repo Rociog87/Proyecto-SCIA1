@@ -1,4 +1,4 @@
-package BD_Productos;
+ package BD_Productos;
 
 import Control_BD.ConexionConBaseDatos;
 import AlmacenJurid.Pedidos;
@@ -59,13 +59,11 @@ public class addProductos extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jTextFieldNombre = new javax.swing.JTextField();
         jTextFieldPrecios = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_descripcion = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
         jTextFieldCantidad = new javax.swing.JTextField();
-        jTextField_preciocompra = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jButton3 = new javax.swing.JButton();
@@ -99,13 +97,16 @@ public class addProductos extends javax.swing.JDialog {
         });
 
         jTextFieldPrecios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldPrecios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPreciosActionPerformed(evt);
+            }
+        });
         jTextFieldPrecios.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextFieldPreciosKeyTyped(evt);
             }
         });
-
-        jLabel5.setText("Precio compra");
 
         jLabel7.setText("Stock");
 
@@ -127,14 +128,7 @@ public class addProductos extends javax.swing.JDialog {
             }
         });
 
-        jTextField_preciocompra.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField_preciocompra.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField_preciocompraKeyTyped(evt);
-            }
-        });
-
-        jLabel9.setText("Precio venta");
+        jLabel9.setText("Precio");
 
         jButton3.setBackground(new java.awt.Color(0, 153, 102));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
@@ -170,33 +164,6 @@ public class addProductos extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(254, 254, 254)
-                                .addComponent(jLabel9)
-                                .addGap(70, 70, 70)
-                                .addComponent(jTextFieldPrecios, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel8))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(89, 89, 89)))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(167, 167, 167)
-                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField_preciocompra, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(150, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +174,31 @@ public class addProductos extends javax.swing.JDialog {
                                 .addGap(125, 125, 125))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jButton2)
-                                .addGap(185, 185, 185))))))
+                                .addGap(185, 185, 185))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel8))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGap(14, 14, 14)
+                                    .addComponent(jLabel9))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(167, 167, 167)
+                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(190, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jTextFieldPrecios, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,19 +207,15 @@ public class addProductos extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField_preciocompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel9)
-                            .addComponent(jTextFieldPrecios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(74, 74, 74)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel8))
+                .addGap(71, 71, 71)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jTextFieldPrecios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -406,7 +393,7 @@ public class addProductos extends javax.swing.JDialog {
 
         Connection reg = conectar.getConexion();
 
-        String sql = "INSERT INTO table_Productos ( idProductos, nombreProducto, precioventaProducto,descripcionProductos,stock,preciocompraProductos,fecha) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO table_Productos ( idProductos, nombreProducto, precioventaProducto,descripcionProductos,stock,Productos,fecha) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement pst = reg.prepareStatement(sql);
             pst.setString(1, "");
@@ -414,8 +401,7 @@ public class addProductos extends javax.swing.JDialog {
             pst.setString(3, jTextFieldPrecios.getText());
             pst.setString(4, jTextArea_descripcion.getText());
             pst.setInt(5, Integer.parseInt(jTextFieldCantidad.getText()));
-            pst.setString(6, (jTextField_preciocompra.getText()));
-            pst.setString(7, jDateChooser1.getDateFormatString());
+            pst.setString(6, jDateChooser1.getDateFormatString());
             
             int n = pst.executeUpdate();
             if (n > 0) {
@@ -479,18 +465,6 @@ public class addProductos extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jTextFieldCantidadKeyTyped
 
-    private void jTextField_preciocompraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_preciocompraKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-
-        if (Character.isLetter(c)) {
-
-            getToolkit().beep();
-
-            evt.consume();
-        }
-    }//GEN-LAST:event_jTextField_preciocompraKeyTyped
-
     private void jTextFieldPreciosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPreciosKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
@@ -524,6 +498,10 @@ char car = evt.getKeyChar();
 
        
     }//GEN-LAST:event_jTextArea_descripcionKeyTyped
+
+    private void jTextFieldPreciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPreciosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPreciosActionPerformed
     void open() throws IOException {
 
         JFileChooser JFC = new JFileChooser();
@@ -688,7 +666,6 @@ char car = evt.getKeyChar();
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -705,6 +682,5 @@ char car = evt.getKeyChar();
     private javax.swing.JTextField jTextFieldCantidad;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldPrecios;
-    private javax.swing.JTextField jTextField_preciocompra;
     // End of variables declaration//GEN-END:variables
 }

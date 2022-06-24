@@ -24,7 +24,7 @@ public class Control_Productos {
     DefaultTableModel modelo;
     private String sSQL = "";
 
-    String[] titulosColumnas = {"ID", "NOMBRE", "PRECIO VENTA", "DESCRIPCIÓN", "STOCK", "PRECIO COMPRA", "FECHA"};
+    String[] titulosColumnas = {"ID", "NOMBRE", "PRECIO", "DESCRIPCIÓN", "STOCK",  "CADUCIDAD"};
     String info[][] = {};
 
     public void CargarProductos() {
@@ -93,7 +93,7 @@ public class Control_Productos {
         totalregistros = 0;
         modelo = new DefaultTableModel(null, titulos);
 
-        sSQL = "SELECT idProductos,nombreProducto,precioventaProducto,descripcionProductos,stock,preciocompraProductos,fecha FROM table_Productos ORDER BY idProductos ASC";
+        sSQL = "SELECT idProductos,nombreProducto,precioventaProducto,descripcionProductos,stock,fecha FROM table_Productos ORDER BY idProductos ASC";
 
         try {
             conexion = ConexionConBaseDatos.getConexion();
@@ -108,8 +108,7 @@ public class Control_Productos {
                 registro[2] = resultado.getString("precioventaProducto");
                 registro[3] = resultado.getString("descripcionProductos");
                 registro[4] = resultado.getString("stock");
-                registro[5] = resultado.getString("preciocompraProductos");
-                registro[6] = resultado.getString("fecha");
+                registro[5] = resultado.getString("fecha");
 
                 totalregistros = totalregistros + 1;
                 modelo.addRow(registro);
@@ -173,10 +172,9 @@ public class Control_Productos {
                 String precioventaProducto = rs.getString("precioventaProducto");
                 String descripcion = rs.getString("descripcionProductos");
                 String cantidad = rs.getString("stock");
-                String preciocompraProductos = rs.getString("preciocompraProductos");
                 String fecha = rs.getString("fecha");
 
-                Object[] info = {codigo, nombre, precioventaProducto, descripcion, cantidad, preciocompraProductos, fecha};
+                Object[] info = {codigo, nombre, precioventaProducto, descripcion, cantidad, fecha};
 
                 modelo.addRow(info);
 
@@ -209,10 +207,9 @@ public class Control_Productos {
                 String precioventaProducto = resultado.getString("precioventaProducto");
                 String descripcion = resultado.getString("descripcionProductos");
                 String cantidad = resultado.getString("stock");
-                String preciocompraProductos = resultado.getString("preciocompraProductos");
                 String fecha = resultado.getString("fecha");
 
-                Object[] info = {Codigo, Nombre, precioventaProducto, descripcion, cantidad, preciocompraProductos, fecha};
+                Object[] info = {Codigo, Nombre, precioventaProducto, descripcion, cantidad, fecha};
 
                 modelo.addRow(info);
 
@@ -245,10 +242,9 @@ public class Control_Productos {
                 String precioventa = resultado.getString("precioventaProducto");
                 String descripcion = resultado.getString("descripcionProductos");
                 String cantidad = resultado.getString("stock");
-                String preciocompraProductos = resultado.getString("preciocompraProductos");
                 String fecha = resultado.getString("fecha");
 
-                Object[] info = {codigo, nombre, precioventa, descripcion, cantidad, preciocompraProductos, fecha};
+                Object[] info = {codigo, nombre, precioventa, descripcion, cantidad, fecha};
 
                 modelo.addRow(info);
 
@@ -300,10 +296,9 @@ public class Control_Productos {
                 String precioventa = resultado.getString("precioventaProducto");
                 String descripcion = resultado.getString("descripcionProductos");
                 String cantidad = resultado.getString("stock");
-                String preciocompra = resultado.getString("preciocompraProductos");
                 String fecha = resultado.getString("fecha");
 
-                Object[] info = {codigo, nombre, precioventa, descripcion, cantidad, preciocompra, fecha};
+                Object[] info = {codigo, nombre, precioventa, descripcion, cantidad, fecha};
 
                 modelo.addRow(info);
 
@@ -369,16 +364,13 @@ public class Control_Productos {
         }
     }
 
-    public void ModificarProductos(String code, String nombre, float precios, String descripcion, int cantidad_productos, float preciocompra, String fecha) {
+    public void ModificarProductos(String code, String nombre, float precios, String descripcion, int cantidad_productos, String fecha) {
 
         try {
             conexion = ConexionConBaseDatos.getConexion();
             Statement comando = conexion.createStatement();
-
-//            int cantidad = comando.executeUpdate("update table_Productos set nombreProducto ='" + nombre + "', "
-//                    + " precioventaProducto ='" + precios + "' " + ", descripcionProductos ='" + descripcion + "'" + ", stock ='" + cantidad_productos + "'" + " , preciocompraProductos ='" + preciocompra + "' , fecha =" + fecha + "  where idProductos=" + code);
-//            
-            int cantidad = comando.executeUpdate(" UPDATE `scia`.`table_productos` SET `nombreProducto` = '" + nombre + "', `precioventaProducto` = '" + precios + "', `descripcionProductos` = '" + descripcion + "', `stock` = '" + cantidad_productos + "', `preciocompraProductos` = '" + preciocompra + "', `fecha` = '" + fecha + "' WHERE (`idProductos` = '" + code + "')");
+            
+            int cantidad = comando.executeUpdate(" UPDATE `scia`.`table_productos` SET `nombreProducto` = '" + nombre + "', `precioventaProducto` = '" + precios + "', `descripcionProductos` = '" + descripcion + "', `stock` = '" + cantidad_productos + "', `fecha` = '" + fecha + "' WHERE (`idProductos` = '" + code + "')");
 
             if (cantidad == 1) {
                 JOptionPane.showMessageDialog(null, " Modifico con Exito");
@@ -447,7 +439,7 @@ public class Control_Productos {
             String selectSQL;
             resultado = null;
 
-            selectSQL = "SELECT * FROM table_Productos WHERE nombreProducto LIKE ? AND stock>0 ORDER BY idProductos ASC";
+            selectSQL = "SELECT * FROM table_Productos WHERE nombreProducto LIKE ? AND stock>5 ORDER BY idProductos ASC";
             ps = conexion.prepareStatement(selectSQL);
             ps.setString(1, "%" + parametroBusqueda + "%");
 
@@ -459,10 +451,9 @@ public class Control_Productos {
                 String precioventa = resultado.getString("precioventaProducto");
                 String descripcion = resultado.getString("descripcionProductos");
                 String cantidad = resultado.getString("stock");
-                String preciocompra = resultado.getString("preciocompraProductos");
                 String fecha = resultado.getString("fecha");
 
-                Object[] info = {codigo, nombre, precioventa, descripcion, cantidad, preciocompra, fecha};
+                Object[] info = {codigo, nombre, precioventa, descripcion, cantidad, fecha};
 
                 modelo.addRow(info);
 

@@ -222,7 +222,7 @@ public class ConsultarProductos extends javax.swing.JDialog {
         try {
             String parametroBusqueda = jTextFieldParametroBusqueda.getText();
             cc.buscarProductos(parametroBusqueda);
-            int[] anchos = {50, 200, 50, 200, 50, 60, 150};
+            int[] anchos = {50,150, 200, 50, 200, 200};
             for (int i = 0; i < jTableListarProducto.getColumnCount(); i++) {
                 jTableListarProducto.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
             }
@@ -235,7 +235,7 @@ public class ConsultarProductos extends javax.swing.JDialog {
     private void jButtonBuscarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarTodosActionPerformed
 
         cc.listarTodosProductos();
-        int[] anchos = {50, 200, 50, 200, 50, 60, 150};
+        int[] anchos = {50,150, 200, 50, 200, 200};
         for (int i = 0; i < jTableListarProducto.getColumnCount(); i++) {
             jTableListarProducto.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
         }
@@ -265,7 +265,7 @@ public class ConsultarProductos extends javax.swing.JDialog {
         try {
             String parametroBusqueda = jTextFieldParametroBusqueda.getText();
             cc.buscarProductos(parametroBusqueda);
-            int[] anchos = {50, 200, 50, 200, 50, 60, 150};
+            int[] anchos = {50,150, 200, 50, 200, 200};
             for (int i = 0; i < jTableListarProducto.getColumnCount(); i++) {
                 jTableListarProducto.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
             }
@@ -309,7 +309,7 @@ public class ConsultarProductos extends javax.swing.JDialog {
     private void btn_alertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_alertaActionPerformed
         // TODO add your handling code here:
         cc.listarTodosProductos_por_agotar();
-        int[] anchos = {50, 200, 50, 200, 50, 60, 150};
+        int[] anchos = {50,150, 200, 50, 200, 200};
         for (int i = 5; i < jTableListarProducto.getColumnCount(); i++) {
             jTableListarProducto.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
         }
