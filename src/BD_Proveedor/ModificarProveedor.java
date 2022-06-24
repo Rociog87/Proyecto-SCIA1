@@ -386,12 +386,7 @@ public class ModificarProveedor extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextFieldNombreKeyTyped
 
     private void jTextField_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_telefonoKeyTyped
-        //       Paa que solo acepte 10 numeros
-        {
-            if (jTextField_telefono.getText().length() >= 10) {
-                evt.consume();
-
-                //Para q acepte solo numeros
+        //Para q acepte solo numeros
                 char c = evt.getKeyChar();
 
                 if (Character.isLetter(c)) {
@@ -401,6 +396,13 @@ public class ModificarProveedor extends javax.swing.JDialog {
                     evt.consume();
 
                 }
+
+//       Paa que solo acepte 10 numeros
+        {
+            if (jTextField_telefono.getText().length() >= 10) {
+                evt.consume();
+
+                
             }
         }
     }//GEN-LAST:event_jTextField_telefonoKeyTyped
