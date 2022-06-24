@@ -294,44 +294,49 @@ try {
 
     private void jButtonModificarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarVendedorActionPerformed
 
-                if (txt_nombres.getText().length() == 0 || txt_apellidos.getText().length() == 0 || txt_usuario.getText().length() == 0 || txt_pasword.getText().length() == 0 || txt_correo.getText().length() == 0) {
-
+            if (txt_usuario.getText().length() == 0 || txt_pasword.getText().length() == 0 ||  txt_usuario.getText().length() == 0 || txt_pasword.getText().length() == 0 || txt_correo.getText().length() == 0) {
+            
             JOptionPane.showMessageDialog(rootPane, "rellene todos los campos");
 
         } else {
+                
+                
             vusuario dts = new vusuario();
             fusuario func = new fusuario();
-            dts.setUsuario(txt_usuario.getText());
-            dts.setPassword(txt_pasword.getText());
-            int tipo = combo_tipo.getSelectedIndex();
-            dts.setTipo((String) combo_tipo.getItemAt(tipo));
+            int numero=Integer.parseInt(idusuario);
+//            String numCadena= String.valueOf(idusuario);
+            dts.setId(numero);
             dts.setNombres(txt_nombres.getText());
-
             dts.setApellidos(txt_apellidos.getText());
+            dts.setUsuario(txt_usuario.getText());
+             int tipo = combo_tipo.getSelectedIndex();
+            dts.setTipo((String) combo_tipo.getItemAt(tipo));
             dts.setCorreo(txt_correo.getText());
-            
-
-            if (func.editar(dts)) {
+            dts.setPassword(txt_pasword.getText());
+           
+         
+           if (func.editar(dts)) {
                 JOptionPane.showMessageDialog(rootPane, "El Usuario fue Modificado satisfactoriamente");
+                iniciar();
             }
         }
     }//GEN-LAST:event_jButtonModificarVendedorActionPerformed
 
     private void jTable_usuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_usuarioMouseClicked
-        // TODO add your handling code here:
-        //                 btn_eliminar.setEnabled(true);
-                    jButtonModificarVendedor.setEnabled(true);
+        
 
         int fila = jTable_usuario.rowAtPoint(evt.getPoint());
 
         idusuario = (jTable_usuario.getValueAt(fila, 0).toString());
-        
+        txt_nombres.setText((jTable_usuario.getValueAt(fila, 4).toString()));
+        txt_apellidos.setText((jTable_usuario.getValueAt(fila, 5).toString()));
         txt_usuario.setText((jTable_usuario.getValueAt(fila, 1).toString()));
+        txt_correo.setText((jTable_usuario.getValueAt(fila, 6).toString()));  
         txt_pasword  .setText(jTable_usuario.getValueAt(fila, 2).toString());
-        txt_apellidos.setText((jTable_usuario.getValueAt(fila, 3).toString()));
-//        combo_tipo.getItemAt((jTable_usuario.getValueAt( fila,4).toString()));
-        txt_nombres.setText((jTable_usuario.getValueAt(fila, 5).toString()));
-        txt_correo.setText((jTable_usuario.getValueAt(fila, 6).toString()));    
+       
+       
+        
+          
         
     }//GEN-LAST:event_jTable_usuarioMouseClicked
 
@@ -344,6 +349,7 @@ try {
         for (int i = 0; i < jTable_usuario.getColumnCount(); i++) {
             jTable_usuario.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
         }
+        
     }//GEN-LAST:event_jTextField_busquedaKeyPressed
 
     private void txt_correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_correoActionPerformed

@@ -144,8 +144,8 @@ public class fusuario {
         cn = ConexionConBaseDatos.getConexion();
 //consultar editar usuario
 
-        sSQL2 = "update usuario set id=?,usuario=?,password=?,tipo=?,nombres=?,apellidos=?,correo=?"
-                + " where id=?";
+        sSQL2 = "update usuario set usuario=?,password=?,tipo=?,nombres=?,apellidos=?,correo=?"
+                + " where id='"+dts.getId()+"'";
         try {
 
             PreparedStatement pst = cn.prepareStatement(sSQL2);
@@ -153,7 +153,7 @@ public class fusuario {
             pst.setString(1, dts.getUsuario());
             pst.setString(2, dts.getPassword());
             pst.setString(3, dts.getTipo());
-//            pst.setString(4, dts.getTipo());
+            //pst.setString(4, dts.getTipo());
             pst.setString(4, dts.getNombres());
             pst.setString(5, dts.getApellidos());
             pst.setString(6, dts.getCorreo());
